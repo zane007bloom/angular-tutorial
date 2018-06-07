@@ -1,0 +1,14 @@
+<h3>Heroes</h3>
+
+<div *ngFor="let hero of heroes" [ngStyle]="{'border-color': 'cornflowerblue', 'cursor': 'pointer'}" class="hero-block"
+     (click)="selectHero(hero)">
+  <div>Id: {{hero.id}}</div>
+  <div>Name: {{hero.name | uppercase}}</div>
+</div>
+
+<div *ngIf="showEditor">
+  <heroes-editor [hero]="selectedHero" (edited)="editedHero($event)"></heroes-editor>
+</div>
+
+
+<button [ngStyle]="{'margin-top': '10px'}" routerLink="/villains">View Villains</button>

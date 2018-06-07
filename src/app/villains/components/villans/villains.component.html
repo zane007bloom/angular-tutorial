@@ -1,0 +1,8 @@
+<h3>Villains</h3>
+
+<div *ngFor="let villain of villains" [ngStyle]="{'border-color': 'red', 'cursor': 'pointer'}" class="villain-block">
+  <div>Id: {{villain.id}}</div>
+  <div>Name: {{villain.name | uppercase}}</div>
+</div>
+
+<button [ngStyle]="{'margin-top': '10px'}" routerLink="/heroes">View Heroes</button>
