@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HeroesService } from '../../services/heroes.service';
 import { Hero } from '../../models/hero.model';
 
@@ -7,7 +7,7 @@ import { Hero } from '../../models/hero.model';
   templateUrl: './heroes.component.html',
   styleUrls: ['./heroes.component.css']
 })
-export class HeroesComponent implements OnInit {
+export class HeroesComponent implements OnInit, OnDestroy {
   heroes: Hero[];
   showEditor = false;
   selectedHero: Hero;
@@ -16,7 +16,12 @@ export class HeroesComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('Initialising HeroesComponent');
     this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes);
+  }
+
+  ngOnDestroy(): void {
+    console.log('Destroying HeroesComponent');
   }
 
   selectHero(hero: Hero) {
