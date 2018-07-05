@@ -12,6 +12,6 @@ export const reducers: ActionReducerMap<State> = {
 };
 
 
-export const getLayoutState = createFeatureSelector<fromLayout.State>('layout');
+export const selectLayoutState = createFeatureSelector<fromLayout.State>('layout');
 
-export const getIsLoading = createSelector(getLayoutState, (state: fromLayout.State) => state.outstandingRestCalls !== 0);
+export const selectIsLoading = createSelector(selectLayoutState, (state: fromLayout.State) => state.outstandingRestCalls !== 0);

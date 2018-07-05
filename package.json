@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "mock-api": " json-server --watch mock/db.json"
+    "mock-api": " json-server --watch mock/db.json --delay 1000"
   },
   "private": true,
   "dependencies": {

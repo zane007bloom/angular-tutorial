@@ -3,6 +3,7 @@ import { Hero } from '../models/hero.model';
 
 export enum HeroTypes {
   RetrieveAllHeroes = '[Heroes] Retrieve All',
+  ClearAllHeroes = '[Heroes] Clear All',
   RetrieveAllHeroesSuccess = '[Heroes] Retrieve All Success',
   UpdateHero = '[Heroes] Update',
   UpdateHeroSuccess = '[Heroes] Update Success',
@@ -10,6 +11,10 @@ export enum HeroTypes {
 
 export class RetrieveAllHeroes implements Action {
   public readonly type = HeroTypes.RetrieveAllHeroes;
+}
+
+export class ClearAllHeroes implements Action {
+  public readonly type = HeroTypes.ClearAllHeroes;
 }
 
 export class RetrieveAllHeroesSuccess implements Action {
@@ -33,4 +38,4 @@ export class UpdateHeroSuccess implements Action {
   }
 }
 
-export type HeroActions = RetrieveAllHeroes | RetrieveAllHeroesSuccess | UpdateHero | UpdateHeroSuccess;
+export type HeroActions = RetrieveAllHeroes | RetrieveAllHeroesSuccess | UpdateHero | UpdateHeroSuccess | ClearAllHeroes;

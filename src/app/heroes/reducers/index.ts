@@ -18,6 +18,10 @@ export function heroes(state = [], action: HeroActions): Hero[] {
       return [...action.payload.heroes];
     }
 
+    case HeroTypes.ClearAllHeroes: {
+      return [];
+    }
+
     default: {
       return state;
     }

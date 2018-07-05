@@ -3,7 +3,7 @@ import { HeroesService } from '../../services/heroes.service';
 import { Hero } from '../../models/hero.model';
 import * as fromHeroes from '../../reducers';
 import { Store } from '@ngrx/store';
-import { RetrieveAllHeroes } from '../../actions/hero.actions';
+import { ClearAllHeroes, RetrieveAllHeroes } from '../../actions/hero.actions';
 
 @Component({
   selector: 'heroes',
@@ -29,6 +29,7 @@ export class HeroesComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     console.log('Destroying HeroesComponent');
+    this.store.dispatch(new ClearAllHeroes());
   }
 
   selectHero(hero: Hero) {

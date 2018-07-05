@@ -10,6 +10,12 @@ import { StoreModule } from '@ngrx/store';
 import { reducers } from './reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { LoadingIndicatorInterceptor } from './services/loading-indicator.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
+const httpInterceptor = {
+  provide: HTTP_INTERCEPTORS, useClass: LoadingIndicatorInterceptor, multi: true
+};
 
 @NgModule({
   declarations: [
@@ -24,7 +30,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     StoreDevtoolsModule.instrument(),
     EffectsModule.forRoot([])
   ],
-  providers: [],
+  providers: [httpInterceptor],
   bootstrap: [AppComponent]
 })
 export class AppModule {
