@@ -7,8 +7,8 @@
   <div>Name: {{hero.name | uppercase}}</div>
 </div>
 
-<div *ngIf="showEditor">
-  <heroes-editor [hero]="selectedHero" (edited)="editedHero($event)"></heroes-editor>
+<div *ngIf="(selectedHero$ | async)">
+  <heroes-editor [hero]="selectedHero$ | async" (edited)="editedHero($event)"></heroes-editor>
 </div>
 
 

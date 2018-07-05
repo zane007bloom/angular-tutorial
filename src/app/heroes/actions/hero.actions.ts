@@ -7,6 +7,7 @@ export enum HeroTypes {
   RetrieveAllHeroesSuccess = '[Heroes] Retrieve All Success',
   UpdateHero = '[Heroes] Update',
   UpdateHeroSuccess = '[Heroes] Update Success',
+  SelectHero = '[Heroes] Select'
 }
 
 export class RetrieveAllHeroes implements Action {
@@ -38,4 +39,11 @@ export class UpdateHeroSuccess implements Action {
   }
 }
 
-export type HeroActions = RetrieveAllHeroes | RetrieveAllHeroesSuccess | UpdateHero | UpdateHeroSuccess | ClearAllHeroes;
+export class SelectHero implements Action {
+  public readonly type = HeroTypes.SelectHero;
+
+  constructor(public payload: { hero: Hero }) {
+  }
+}
+
+export type HeroActions = RetrieveAllHeroes | RetrieveAllHeroesSuccess | UpdateHero | UpdateHeroSuccess | ClearAllHeroes | SelectHero;

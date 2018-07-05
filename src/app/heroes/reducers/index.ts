@@ -5,6 +5,7 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 export interface HeroState {
   heroes: Hero[];
+  selectedHero: Hero;
 }
 
 export interface State extends fromRoot.State {
@@ -18,6 +19,13 @@ export function heroes(state = [], action: HeroActions): Hero[] {
       return [...action.payload.heroes];
     }
 
+    case HeroTypes.UpdateHeroSuccess: {
+      const newState = state.filter(hero => hero.id !== action.payload.hero.id);
+      newState.push(action.payload.hero);
+      newState.sort((a: Hero, b: Hero) => a.id - b.id);
+      return newState;
+    }
+
     case HeroTypes.ClearAllHeroes: {
       return [];
     }
@@ -29,9 +37,33 @@ export function heroes(state = [], action: HeroActions): Hero[] {
   }
 }
 
+export function selectedHero(state, action: HeroActions): Hero {
+  switch (action.type) {
+
+    case HeroTypes.SelectHero: {
+      if (state === action.payload.hero) {
+        return null;
+      } else {
+        return action.payload.hero;
+      }
+    }
+
+    case HeroTypes.UpdateHeroSuccess: {
+      return null;
+    }
+
+    default: {
+      return state;
+    }
+
+  }
+}
+
 export const reducers = {
-  heroes: heroes
+  heroes: heroes,
+  selectedHero
 };
 
 export const selectHeroState = createFeatureSelector<HeroState>('heroState');
 export const selectHeroes = createSelector(selectHeroState, (heroState: HeroState) => heroState.heroes);
+export const selectSelectedHero = createSelector(selectHeroState, (heroState: HeroState) => heroState.selectedHero);

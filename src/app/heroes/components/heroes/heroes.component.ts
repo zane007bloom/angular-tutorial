@@ -3,7 +3,7 @@ import { HeroesService } from '../../services/heroes.service';
 import { Hero } from '../../models/hero.model';
 import * as fromHeroes from '../../reducers';
 import { Store } from '@ngrx/store';
-import { ClearAllHeroes, RetrieveAllHeroes } from '../../actions/hero.actions';
+import { ClearAllHeroes, RetrieveAllHeroes, SelectHero, UpdateHero } from '../../actions/hero.actions';
 
 @Component({
   selector: 'heroes',
@@ -13,10 +13,7 @@ import { ClearAllHeroes, RetrieveAllHeroes } from '../../actions/hero.actions';
 export class HeroesComponent implements OnInit, OnDestroy {
 
   heroes$ = this.store.select(fromHeroes.selectHeroes);
-
-  heroes: Hero[];
-  showEditor = false;
-  selectedHero: Hero;
+  selectedHero$ = this.store.select(fromHeroes.selectSelectedHero);
 
   constructor(private heroService: HeroesService, private store: Store<fromHeroes.State>) {
   }
@@ -33,20 +30,11 @@ export class HeroesComponent implements OnInit, OnDestroy {
   }
 
   selectHero(hero: Hero) {
-    this.selectedHero = new Hero(hero.id, hero.name);
-    this.toggleEditor();
+    this.store.dispatch(new SelectHero({hero}));
   }
 
   editedHero(editedHero: Hero) {
-    this.heroes = this.heroes.filter(hero => hero.id !== editedHero.id);
-    this.heroes.push(editedHero);
-    this.heroes.sort((a: Hero, b: Hero) => a.id - b.id);
-    this.toggleEditor();
-    this.heroService.update(editedHero).subscribe();
-  }
-
-  toggleEditor() {
-    this.showEditor = !this.showEditor;
+    this.store.dispatch(new UpdateHero({hero: editedHero}));
   }
 
 }

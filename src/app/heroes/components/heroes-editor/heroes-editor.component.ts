@@ -8,8 +8,16 @@ import { Hero } from '../../models/hero.model';
 })
 export class HeroesEditorComponent implements OnInit {
 
+  private editingHero: Hero;
+
   @Input()
-  hero: Hero;
+  set hero(value: Hero) {
+    this.editingHero = new Hero(value.id, value.name);
+  }
+
+  get hero() {
+    return this.editingHero;
+  }
 
   @Output()
   edited = new EventEmitter<Hero>();
