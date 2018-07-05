@@ -38,5 +38,4 @@ export class HeroesComponent implements OnInit, OnDestroy {
   editedHero(editedHero: Hero) {
     this.store.dispatch(new UpdateHero({hero: editedHero}));
   }
-
 }

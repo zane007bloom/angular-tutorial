@@ -33,5 +33,4 @@ export class HeroesEditorComponent implements OnInit {
     this.edited.emit(this.hero);
   }
 
-
 }
