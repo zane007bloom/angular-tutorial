@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Villain } from '../../models/villain.model';
 
 @Component({
   selector: 'villains',
   templateUrl: './villains.component.html',
-  styleUrls: ['./villains.component.css']
+  styleUrls: ['./villains.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VillainsComponent implements OnInit {
   villains: Villain[];

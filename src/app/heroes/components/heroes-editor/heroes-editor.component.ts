@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Hero } from '../../models/hero.model';
 
 @Component({
   selector: 'heroes-editor',
   templateUrl: './heroes-editor.component.html',
-  styleUrls: ['./heroes-editor.component.css']
+  styleUrls: ['./heroes-editor.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeroesEditorComponent implements OnInit {
 

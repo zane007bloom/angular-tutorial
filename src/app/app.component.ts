@@ -1,17 +1,11 @@
-import { Component } from '@angular/core';
-import { selectIsLoading, State } from './reducers';
-import { Store } from '@ngrx/store';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
-
-  isLoading$ = this.store.select(selectIsLoading);
-
-  constructor(private store: Store<State>) {
-  }
 
 }
