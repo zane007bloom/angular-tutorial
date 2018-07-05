@@ -6,6 +6,10 @@ import { HeroesModule } from './heroes/heroes.module';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
 import { VillainsModule } from './villains/villains.module';
+import { StoreModule } from '@ngrx/store';
+import { reducers } from './reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -15,7 +19,10 @@ import { VillainsModule } from './villains/villains.module';
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     HeroesModule,
-    VillainsModule
+    VillainsModule,
+    StoreModule.forRoot(reducers),
+    StoreDevtoolsModule.instrument(),
+    EffectsModule.forRoot([])
   ],
   providers: [],
   bootstrap: [AppComponent]

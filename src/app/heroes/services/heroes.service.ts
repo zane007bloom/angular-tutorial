@@ -6,18 +6,20 @@ import { Hero } from '../models/hero.model';
 @Injectable()
 export class HeroesService {
 
+  private endPoint = 'http://localhost:3000';
+
   constructor(private httpClient: HttpClient) {
   }
 
   public getHeroes(): Observable<Hero[]> {
-    return this.httpClient.get<Hero[]>('http://localhost:3000/heroes');
+    return this.httpClient.get<Hero[]>(this.endPoint + '/heroes');
   }
 
-  update(hero: Hero) {
-    return this.httpClient.put('http://localhost:3000/heroes/' + hero.id, hero);
+  public update(hero: Hero) {
+    return this.httpClient.put(this.endPoint + '/heroes/' + hero.id, hero);
   }
 
-  create(hero: Hero): Observable<Hero> {
-    return this.httpClient.post<Hero>('http://localhost:3000/heroes/', hero);
+  public create(hero: Hero): Observable<Hero> {
+    return this.httpClient.post<Hero>(this.endPoint + '/heroes/', hero);
   }
 }

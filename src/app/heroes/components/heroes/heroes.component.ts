@@ -1,6 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HeroesService } from '../../services/heroes.service';
 import { Hero } from '../../models/hero.model';
+import * as fromHeroes from '../../reducers';
+import { Store } from '@ngrx/store';
+import { RetrieveAllHeroes } from '../../actions/hero.actions';
 
 @Component({
   selector: 'heroes',
@@ -8,16 +11,20 @@ import { Hero } from '../../models/hero.model';
   styleUrls: ['./heroes.component.css']
 })
 export class HeroesComponent implements OnInit, OnDestroy {
+
+  heroes$ = this.store.select(fromHeroes.selectHeroes);
+
   heroes: Hero[];
   showEditor = false;
   selectedHero: Hero;
 
-  constructor(private heroService: HeroesService) {
+  constructor(private heroService: HeroesService, private store: Store<fromHeroes.State>) {
   }
 
   ngOnInit() {
     console.log('Initialising HeroesComponent');
-    this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes);
+    this.store.dispatch(new RetrieveAllHeroes());
+    this.heroes$.subscribe(h => console.log('here ' + h));
   }
 
   ngOnDestroy(): void {

@@ -1,6 +1,7 @@
 <h3>Heroes</h3>
 
-<div *ngFor="let hero of heroes" [ngStyle]="{'border-color': 'cornflowerblue', 'cursor': 'pointer'}" class="hero-block"
+<div *ngFor="let hero of (heroes$ | async)" [ngStyle]="{'border-color': 'cornflowerblue', 'cursor': 'pointer'}"
+     class="hero-block"
      (click)="selectHero(hero)">
   <div>Id: {{hero.id}}</div>
   <div>Name: {{hero.name | uppercase}}</div>
